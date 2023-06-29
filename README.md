@@ -4,6 +4,8 @@ Una mirada a los sentimientos asociados a los '[Versos al paso](https://versosal
 
 Se tomará como base la relación de frases en formato CSV de [versosalpaso.madrid.es.csv](https://github.com/jagedn/versosalpaso.madrid.es.csv).
 
+## Stack a utilizar
+
 Para el análisis de sentimientos se utilizará un stack Python para la ejecución de Cuadernos Jupyter. Más concretamente la imagen [jupyter/minimal-notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-minimal-notebook) ejecutado como un contenedor con [Docker CLI](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/running.html).
 
 Para ejecutar el contenedor en modo interactivo[^1] se puede usar
@@ -42,6 +44,11 @@ o borrado permanente.
 $ docker rm jupy-sentimiento-versos
 jupy-sentimiento-versos
 ```
+
+## Clasificación por el sentimiento asociado
+
+Inspirado en el breve curso de una hora [ChatGPT Prompt Engineering for Developers](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/) por DeepLearning.AI se explora en un proceso iterativo la pregunta que mejor puede ayudarnos en esta [clasificación](#sentimientos-al-paso) tal y como se pude ver en el cuaderno Jupyter '[Iterative Prompt using Chat-GPT](./docs/Iterative%20Prompt%20using%20Chat-GPT.pdf)'.
+
 
 Suerte, espero que te haya aportado.
 

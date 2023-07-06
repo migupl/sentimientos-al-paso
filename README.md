@@ -55,7 +55,7 @@ En dicha exploración se utiliza el modelo 'gpt-3.5-turbo' con la [API ChatCompl
 
 El modelo '[text-davinci-003](https://platform.openai.com/docs/models/gpt-3-5) define un máximo de 4.000 tokens para la petición y la respuesta que se realice con OpenAI.
 
-En el cuaderno '[Explore tokenization](./docs/Explore%20tokenization.pdf)' explose explora el límite de tokens a utilizar en cada petición.
+En el cuaderno '[Explore tokenization](./docs/Explore%20tokenization.pdf)' se explora el límite de tokens a utilizar en cada petición así como el procedimiento de agrupamiento de los versos por este límite para la petición a la [API Completions](https://platform.openai.com/docs/guides/gpt/completions-api)
 
 
 Suerte, espero que te haya aportado.

@@ -55,7 +55,13 @@ En dicha exploración se utiliza el modelo 'gpt-3.5-turbo' con la [API ChatCompl
 
 El modelo '[text-davinci-003](https://platform.openai.com/docs/models/gpt-3-5) define un máximo de 4.000 tokens para la petición y la respuesta que se realice con OpenAI.
 
-En el cuaderno '[Explore tokenization](./docs/Explore%20tokenization.pdf)' se explora el límite de tokens a utilizar en cada petición así como el procedimiento de agrupamiento de los versos por este límite para la petición a la [API Completions](https://platform.openai.com/docs/guides/gpt/completions-api)
+En el cuaderno Jupyter '[Explore tokenization](./docs/Explore%20tokenization.pdf)' se explora el límite de tokens a utilizar en cada petición así como el procedimiento de agrupamiento de los versos por este límite para la petición a la [API Completions](https://platform.openai.com/docs/guides/gpt/completions-api)
+
+## Añadir el sentimiento asociado a cada verso
+
+El proceso de obtención del sentimiento asociado a cada uno de los versos se define en el cuaderno Jupiter 'Classify verses by sentiment' y el resultado se guardará en un nuevo fichero CSV [versosalpaso_sentiment_text-davinci-003.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003.csv). Este fichero es copia del original [versos al paso](./notebooks/input/versosalpaso.csv) al que se le ha añadido la columna 'sentiment' con los posibles valores: '*positive*'; '*neutral*'; or, '*negative*'.
+
+
 
 
 Suerte, espero que te haya aportado.

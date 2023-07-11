@@ -61,10 +61,120 @@ En el cuaderno Jupyter '[Explore tokenization](./docs/Explore%20tokenization.pdf
 
 El proceso de obtención del sentimiento asociado a cada uno de los versos se define en el cuaderno Jupiter 'Classify verses by sentiment' y el resultado se guardará en un nuevo fichero CSV [versosalpaso_sentiment_text-davinci-003.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003.csv). Este fichero es copia del original [versos al paso](./notebooks/input/versosalpaso.csv) al que se le ha añadido la columna 'sentiment' con los posibles valores: '*positive*'; '*neutral*'; or, '*negative*'.
 
+## Algunos gráfico por sentimientos
+
+En el cuaderno Jupyter '[Chart visualization](./docs/Chart%20visualization.pdf)' se muestran un par de gráficos por sentimientos.
+
+Uno general
+
+![Sentimientos](./docs/pie-chart_by_sentiment.jpg)
+
+y otro agrupado por distritos
+
+![Sentimientos por distrito](./docs/bar-chart_sentiments_by_district.jpg)
+
+para la tabla obtenida
+
+| district              | negative | neutral | positive |
+| --------------------- | -------- | ------- | -------- |
+| Arganzuela            | 1        | 4       | 48       |
+| Barajas               | 0        | 0       | 11       |
+| Carabanchel           | 2        | 7       | 72       |
+| Centro                | 1        | 2       | 67       |
+| Chamartín             | 0        | 4       | 71       |
+| Chamberí              | 1        | 0       | 63       |
+| Ciudad Lineal         | 0        | 1       | 77       |
+| Fuencarral-El Pardo   | 2        | 4       | 59       |
+| Hortaleza             | 0        | 5       | 51       |
+| Latina                | 1        | 7       | 67       |
+| Moncloa-Aravaca       | 3        | 2       | 58       |
+| Moratalaz             | 0        | 1       | 30       |
+| Puente de Vallecas    | 0        | 5       | 53       |
+| Retiro                | 1        | 1       | 45       |
+| Salamanca             | 1        | 3       | 59       |
+| San Blas - Canillejas | 1        | 1       | 51       |
+| Tetuán                | 2        | 2       | 39       |
+| Usera                 | 0        | 4       | 42       |
+| Vicálvaro             | 0        | 1       | 22       |
+| Villa de Vallecas     | 1        | 0       | 11       |
+| Villaverde            | 1        | 2       | 30       |
+
+### Identificación del distrito
+
+Para la generación del gráfico por distrito se utilizó la [API de geocodificación inversa](https://nominatim.org/release-docs/latest/api/Reverse/) y uso libre de [Nominatim](https://nominatim.org/). La API genera una dirección a partir de un punto (latitud y longitud)con los siguientes datos dependiendo del valor del parametro '*zoom*'(por defecto, 18) de la petición según la tabla
+
+| zoom | address detail          |
+| ----:| ----------------------- |
+|    3 | country                 |
+|    5 | state                   |
+|    8 | county                  |
+|   10 | city                    |
+|   14 | suburb                  |
+|   16 | major streets           |
+|   17 | major and minor streets |
+|   18 | building                |
+
+De forma que para la primera ocurrencia de los datos
+
+| Unnamed: 0 |                                                 0 |
+| ---------- | -------------------------------------------------:|
+| id         |                                              1000 |
+| latitud    |                                         40.425239 |
+| longitud   |                                         -3.691217 |
+| autor      |                             Mario Vaillo de Mingo |
+| barrio     |                                            CENTRO |
+| verso      | Quizá el secreto de la vida tan solo consista ... |
+| direccion  |                       Calle de Génova-Plaza Colón |
+| sentiment  |                                          positive |
+
+la petición y respuesta serían
+
+```bash
+$  curl https://nominatim.openstreetmap.org/reverse\?format\=jsonv2\&lat\=40.4252387\&lon\=-3.6912172 | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   765    0   765    0     0   1747      0 --:--:-- --:--:-- --:--:--  1746
+{
+  "place_id": 13807006,
+  "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+  "osm_type": "node",
+  "osm_id": 1439704870,
+  "lat": "40.4251606",
+  "lon": "-3.6912452",
+  "place_rank": 30,
+  "category": "highway",
+  "type": "bus_stop",
+  "importance": 9.99999999995449e-06,
+  "addresstype": "highway",
+  "name": "Metro Colón",
+  "display_name": "Metro Colón, Calle de Génova, Justicia, Chamberí, Centro, Madrid, Comunidad de Madrid, 28004, España",
+  "address": {
+    "highway": "Metro Colón",
+    "road": "Calle de Génova",
+    "quarter": "Justicia",
+    "suburb": "Chamberí",
+    "city_district": "Centro",
+    "city": "Madrid",
+    "state": "Comunidad de Madrid",
+    "ISO3166-2-lvl4": "ES-MD",
+    "postcode": "28004",
+    "country": "España",
+    "country_code": "es"
+  },
+  "boundingbox": [
+    "40.4251106",
+    "40.4252106",
+    "-3.6912952",
+    "-3.6911952"
+  ]
+}
+$
+```
+
+Se añadieron los datos de 'quarter', 'city_district' y 'city' al fichero CSV con los sentimientos y se guardaron en el nuevo ficher CSV [versosalpaso_sentiment_text-davinci-003_geo.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003_geo.csv).
 
 
-
-Suerte, espero que te haya aportado.
+Suerte, espero que aporte.
 
 ## Licencia
 

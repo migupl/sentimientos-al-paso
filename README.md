@@ -1,6 +1,6 @@
 # Sentimientos al paso
 
-Una mirada a los sentimientos asociados a los '[Versos al paso](https://versosalpaso.madrid.es/)' que acompañan al viandante en los pasos de cebra de Madrid.
+Una mirada a los sentimientos asociados a los '[Versos al paso](https://versosalpaso.madrid.es/)' que acompañan al viandante en los pasos de cebra de Madrid. Los datos obtenidos se muestran exentos de valoración alguna.
 
 Se tomará como base la relación de frases en formato CSV de [versosalpaso.madrid.es.csv](https://github.com/jagedn/versosalpaso.madrid.es.csv).
 
@@ -173,11 +173,12 @@ $
 
 Se añadieron los datos de 'quarter', 'city_district' y 'city' al fichero CSV con los sentimientos y se guardaron en el nuevo ficher CSV [versosalpaso_sentiment_text-davinci-003_geo.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003_geo.csv).
 
+## El mapa de los 'Sentimientos al paso'
 
-Suerte, espero que aporte.
+En este [enlace](https://migupl.github.io/sentimientos-al-paso-visualise/) se muestra el mapa de Madrid con los resultados obtenidos.
 
 ## Licencia
 
-[MIT license](http://www.opensource.org/licenses/mit-license.php)
+[MIT license](./LICENSE)
 
 [^1]: Se usa 'jupy-sentimiento-versos' como nombre del contenedor para separar este experimento de cualquier otro. La imagen define *jovyan* como el usuario no 'root' (uid=1000, gid=100) con privilegios completos sobre los directorios */home/jovyan/* y */opt/conda*.

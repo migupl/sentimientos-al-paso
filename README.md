@@ -211,6 +211,42 @@ en base a la tabla
 | Villa de Vallecas     | 0        | 8       | 4        |
 | Villaverde            | 5        | 21      | 7        |
 
+## Usando la librería Python [twitter-XLM-roBERTa-base for Emotion Analysis](https://huggingface.co/daveni/twitter-xlm-roberta-emotion-es)
+
+De igual forma a la comentada arriba tendremos un nuevo cuaderno Jupyter '[Using twitter-XLM-roBERTa-base.ipynb](./notebooks/Using%20twitter-XLM-roBERTa-base.ipynb)' con datos guardados en el fichero [versosalpaso_twitter-XLM-roBERTa-base.csv](./notebooks/output/versosalpaso_twitter-XLM-roBERTa-base.csv)  y que se resumen en los siguientes gráficos
+
+![Sentimientos (twitter-XLM-roBERTa-base)](./docs/pie-chart_by_twitter-XLM-roBERTa-base.jpg)
+
+![Sentimientos por distrito (twitter-XLM-roBERTa-base)](./docs/bar-chart_twitter-XLM-roBERTa-base_by_district.jpg)
+
+en base a la tabla
+
+| twitter-xml_sentiment | negative | neutral | positive |
+| --------------------- | --------:| -------:| --------:|
+| district              |          |         |          |
+| ---                   |      --- |     --- |      --- |
+| Arganzuela            |       12 |      38 |        3 |
+| Barajas               |        2 |       8 |        1 |
+| Carabanchel           |       20 |      56 |        5 |
+| Centro                |       13 |      50 |        7 |
+| Chamartín             |       14 |      54 |        7 |
+| Chamberí              |       11 |      46 |        7 |
+| Ciudad Lineal         |       15 |      58 |        5 |
+| Fuencarral-El Pardo   |       16 |      45 |        4 |
+| Hortaleza             |        8 |      43 |        5 |
+| Latina                |       17 |      52 |        6 |
+| Moncloa-Aravaca       |       17 |      45 |        1 |
+| Moratalaz             |        6 |      22 |        3 |
+| Puente de Vallecas    |       14 |      41 |        3 |
+| Retiro                |       11 |      33 |        3 |
+| Salamanca             |       16 |      40 |        7 |
+| San Blas - Canillejas |       12 |      34 |        7 |
+| Tetuán                |       10 |      31 |        2 |
+| Usera                 |        6 |      37 |        3 |
+| Vicálvaro             |        4 |      18 |        1 |
+| Villa de Vallecas     |        1 |       9 |        2 |
+| Villaverde            |       10 |      20 |        3 |
+
 ## El mapa de los 'Sentimientos al paso'
 
 En este [enlace](https://migupl.github.io/sentimientos-al-paso-visualise/) se muestra el mapa de Madrid con los resultados obtenidos.

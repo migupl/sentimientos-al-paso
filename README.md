@@ -77,29 +77,31 @@ y otro agrupado por distritos
 
 según la siguiente tabla obtenida
 
-| district              | negative | neutral | positive |
-| --------------------- | -------- | ------- | -------- |
-| Arganzuela            | 1        | 4       | 48       |
-| Barajas               | 0        | 0       | 11       |
-| Carabanchel           | 2        | 7       | 72       |
-| Centro                | 1        | 2       | 67       |
-| Chamartín             | 0        | 4       | 71       |
-| Chamberí              | 1        | 0       | 63       |
-| Ciudad Lineal         | 0        | 1       | 77       |
-| Fuencarral-El Pardo   | 2        | 4       | 59       |
-| Hortaleza             | 0        | 5       | 51       |
-| Latina                | 1        | 7       | 67       |
-| Moncloa-Aravaca       | 3        | 2       | 58       |
-| Moratalaz             | 0        | 1       | 30       |
-| Puente de Vallecas    | 0        | 5       | 53       |
-| Retiro                | 1        | 1       | 45       |
-| Salamanca             | 1        | 3       | 59       |
-| San Blas - Canillejas | 1        | 1       | 51       |
-| Tetuán                | 2        | 2       | 39       |
-| Usera                 | 0        | 4       | 42       |
-| Vicálvaro             | 0        | 1       | 22       |
-| Villa de Vallecas     | 1        | 0       | 11       |
-| Villaverde            | 1        | 2       | 30       |
+| sentiment             | negative | neutral | positive |
+| --------------------- | --------:| -------:| --------:|
+| district              |          |         |          |
+| ---                   |      --- |     --- |      --- |
+| Arganzuela            |        1 |       4 |       48 |
+| Barajas               |        0 |       0 |       11 |
+| Carabanchel           |        2 |       7 |       72 |
+| Centro                |        1 |       2 |       67 |
+| Chamartín             |        0 |       4 |       71 |
+| Chamberí              |        1 |       0 |       63 |
+| Ciudad Lineal         |        0 |       1 |       77 |
+| Fuencarral-El Pardo   |        2 |       4 |       59 |
+| Hortaleza             |        0 |       5 |       51 |
+| Latina                |        1 |       7 |       67 |
+| Moncloa-Aravaca       |        3 |       2 |       58 |
+| Moratalaz             |        0 |       1 |       30 |
+| Puente de Vallecas    |        0 |       5 |       53 |
+| Retiro                |        1 |       1 |       45 |
+| Salamanca             |        1 |       3 |       59 |
+| San Blas - Canillejas |        1 |       1 |       51 |
+| Tetuán                |        2 |       2 |       39 |
+| Usera                 |        0 |       4 |       42 |
+| Vicálvaro             |        0 |       1 |       22 |
+| Villa de Vallecas     |        1 |       0 |       11 |
+| Villaverde            |        1 |       2 |       30 |
 
 #### Identificación del distrito
 
@@ -186,30 +188,30 @@ En el cuaderno Jupyter '[Using robertuito-sentiment-analysis](./docs/Using%20rob
 en base a la tabla
 
 | robertuito_sentiment  | negative | neutral | positive |
-| --------------------- | -------- | ------- | -------- |
+| --------------------- | --------:| -------:| --------:|
 | district              |          |         |          |
-| ---                   | ---      | ---     | ---      |
-| Arganzuela            | 12       | 30      | 11       |
-| Barajas               | 3        | 5       | 3        |
-| Carabanchel           | 20       | 49      | 12       |
-| Centro                | 16       | 38      | 16       |
-| Chamartín             | 21       | 36      | 18       |
-| Chamberí              | 20       | 36      | 8        |
-| Ciudad Lineal         | 22       | 47      | 9        |
-| Fuencarral-El Pardo   | 12       | 43      | 10       |
-| Hortaleza             | 11       | 35      | 10       |
-| Latina                | 17       | 46      | 12       |
-| Moncloa-Aravaca       | 19       | 37      | 7        |
-| Moratalaz             | 6        | 20      | 5        |
-| Puente de Vallecas    | 21       | 29      | 8        |
-| Retiro                | 10       | 30      | 7        |
-| Salamanca             | 18       | 33      | 12       |
-| San Blas - Canillejas | 13       | 30      | 10       |
-| Tetuán                | 16       | 22      | 5        |
-| Usera                 | 9        | 29      | 8        |
-| Vicálvaro             | 6        | 13      | 4        |
-| Villa de Vallecas     | 0        | 8       | 4        |
-| Villaverde            | 5        | 21      | 7        |
+| ---                   |      --- |     --- |      --- |
+| Arganzuela            |       12 |      30 |       11 |
+| Barajas               |        3 |       5 |        3 |
+| Carabanchel           |       20 |      49 |       12 |
+| Centro                |       16 |      38 |       16 |
+| Chamartín             |       21 |      36 |       18 |
+| Chamberí              |       20 |      36 |        8 |
+| Ciudad Lineal         |       22 |      47 |        9 |
+| Fuencarral-El Pardo   |       12 |      43 |       10 |
+| Hortaleza             |       11 |      35 |       10 |
+| Latina                |       17 |      46 |       12 |
+| Moncloa-Aravaca       |       19 |      37 |        7 |
+| Moratalaz             |        6 |      20 |        5 |
+| Puente de Vallecas    |       21 |      29 |        8 |
+| Retiro                |       10 |      30 |        7 |
+| Salamanca             |       18 |      33 |       12 |
+| San Blas - Canillejas |       13 |      30 |       10 |
+| Tetuán                |       16 |      22 |        5 |
+| Usera                 |        9 |      29 |        8 |
+| Vicálvaro             |        6 |      13 |        4 |
+| Villa de Vallecas     |        0 |       8 |        4 |
+| Villaverde            |        5 |      21 |        7 |
 
 ## Usando la librería Python [twitter-XLM-roBERTa-base for Emotion Analysis](https://huggingface.co/daveni/twitter-xlm-roberta-emotion-es)
 

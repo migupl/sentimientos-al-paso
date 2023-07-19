@@ -47,21 +47,23 @@ jupy-sentimiento-versos
 
 ## Clasificación por el sentimiento asociado
 
+### Usando [OpenAI](https://openai.com/)
+
 Inspirado en el breve curso de una hora [ChatGPT Prompt Engineering for Developers](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/) por DeepLearning.AI se explora en un proceso iterativo la pregunta que mejor puede ayudarnos en esta [clasificación](#sentimientos-al-paso) tal y como se pude ver en el cuaderno Jupyter '[Iterative Prompt using Chat-GPT](./docs/Iterative%20Prompt%20using%20Chat-GPT.pdf)'.
 
 En dicha exploración se utiliza el modelo 'gpt-3.5-turbo' con la [API ChatCompletion](https://platform.openai.com/docs/guides/gpt/chat-completions-api). Para el propósito de [clasificación](#sentimientos-al-paso) de los 'versos' se utilizara la [API Completions](https://platform.openai.com/docs/guides/gpt/completions-api) con el modelo '[text-davinci-003](https://platform.openai.com/docs/models/gpt-3-5)'.
 
-## Explorando la tokenización
+#### Explorando la tokenización
 
 El modelo '[text-davinci-003](https://platform.openai.com/docs/models/gpt-3-5) define un máximo de 4.000 tokens a consumir entre petición y respuesta.
 
 En el cuaderno Jupyter '[Explore tokenization](./docs/Explore%20tokenization.pdf)' se explora el límite de tokens a utilizar en cada petición así como el procedimiento de agrupamiento de los versos por este límite.
 
-## Añadir el sentimiento asociado a cada verso
+#### Añadir el sentimiento asociado a cada verso
 
 El proceso de obtención del sentimiento asociado a cada uno de los versos se define en el cuaderno Jupiter 'Classify verses by sentiment' y el resultado se guardará en un nuevo fichero CSV [versosalpaso_sentiment_text-davinci-003.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003.csv). Este fichero es copia del original [versos al paso](./notebooks/input/versosalpaso.csv) al que se le ha añadido la columna 'sentiment' con los posibles valores: '*positive*'; '*neutral*'; or, '*negative*'.
 
-## Algunos gráfico por sentimientos
+#### Algunos gráfico por sentimientos
 
 En el cuaderno Jupyter '[Chart visualisation](./docs/Chart%20visualisation.pdf)' se muestran un par de gráficos por sentimientos.
 
@@ -99,7 +101,7 @@ según la siguiente tabla obtenida
 | Villa de Vallecas     | 1        | 0       | 11       |
 | Villaverde            | 1        | 2       | 30       |
 
-### Identificación del distrito
+#### Identificación del distrito
 
 Para la generación del gráfico por distrito se utilizó la [API de geocodificación inversa](https://nominatim.org/release-docs/latest/api/Reverse/) y uso libre de [Nominatim](https://nominatim.org/). La API genera para cada petición referida a un punto (latitud y longitud) una dirección con los siguientes datos y dependiendo del valor del parametro '*zoom*' (por defecto, 18)
 
@@ -173,6 +175,42 @@ $
 
 Se añaden los datos de 'quarter', 'city_district' y 'city' al fichero CSV con los sentimientos y se guardan en el nuevo fichero CSV [versosalpaso_sentiment_text-davinci-003_geo.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003_geo.csv).
 
+## Usando la librería Python [pysentimiento](https://github.com/finiteautomata/pysentimiento/)[^2]
+
+En el cuaderno Jupyter '[Using robertuito-sentiment-analysis](./docs/Using%20robertuito-sentiment-analysis.pdf)' se expone un proceso análogo al ya descrito cuyos resultados se guardan en el fichero CSV [versosalpaso_robertuito-sentiment-analysis.csv](./notebooks/output/versosalpaso_robertuito-sentiment-analysis.csv) y que se resumen en los siguientes gráficos
+
+![Sentimientos (pysentimiento)](./docs/pie-chart_by_pysentimiento.jpg)
+
+![Sentimientos por distrito (pysentimiento)](./docs/bar-chart_pysentimiento_by_district.jpg)
+
+en base a la tabla
+
+| robertuito_sentiment  | negative | neutral | positive |
+| --------------------- | -------- | ------- | -------- |
+| district              |          |         |          |
+| ---                   | ---      | ---     | ---      |
+| Arganzuela            | 12       | 30      | 11       |
+| Barajas               | 3        | 5       | 3        |
+| Carabanchel           | 20       | 49      | 12       |
+| Centro                | 16       | 38      | 16       |
+| Chamartín             | 21       | 36      | 18       |
+| Chamberí              | 20       | 36      | 8        |
+| Ciudad Lineal         | 22       | 47      | 9        |
+| Fuencarral-El Pardo   | 12       | 43      | 10       |
+| Hortaleza             | 11       | 35      | 10       |
+| Latina                | 17       | 46      | 12       |
+| Moncloa-Aravaca       | 19       | 37      | 7        |
+| Moratalaz             | 6        | 20      | 5        |
+| Puente de Vallecas    | 21       | 29      | 8        |
+| Retiro                | 10       | 30      | 7        |
+| Salamanca             | 18       | 33      | 12       |
+| San Blas - Canillejas | 13       | 30      | 10       |
+| Tetuán                | 16       | 22      | 5        |
+| Usera                 | 9        | 29      | 8        |
+| Vicálvaro             | 6        | 13      | 4        |
+| Villa de Vallecas     | 0        | 8       | 4        |
+| Villaverde            | 5        | 21      | 7        |
+
 ## El mapa de los 'Sentimientos al paso'
 
 En este [enlace](https://migupl.github.io/sentimientos-al-paso-visualise/) se muestra el mapa de Madrid con los resultados obtenidos.
@@ -182,3 +220,4 @@ En este [enlace](https://migupl.github.io/sentimientos-al-paso-visualise/) se mu
 [MIT license](./LICENSE)
 
 [^1]: Se usa 'jupy-sentimiento-versos' como nombre del contenedor para separar este experimento de cualquier otro. La imagen define *jovyan* como el usuario no 'root' (uid=1000, gid=100) con privilegios completos sobre los directorios */home/jovyan/* y */opt/conda*.
+[^2]: Juan Manuel Pérez and Juan Carlos Giudici and Franco Luque. **pysentimiento**: A Python Toolkit for Sentiment Analysis and SocialNLP tasks [Internet]. arXiv; 2011. Available from: https://arxiv.org/abs/2106.09462

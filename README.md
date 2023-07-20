@@ -61,51 +61,13 @@ En el cuaderno Jupyter '[Explore tokenization](./docs/Explore%20tokenization.pdf
 
 #### Añadir el sentimiento asociado a cada verso
 
-El proceso de obtención del sentimiento asociado a cada uno de los versos se define en el cuaderno Jupiter 'Classify verses by sentiment' y el resultado se guardará en un nuevo fichero CSV [versosalpaso_sentiment_text-davinci-003.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003.csv). Este fichero es copia del original [versos al paso](./notebooks/input/versosalpaso.csv) al que se le ha añadido la columna 'sentiment' con los posibles valores: '*positive*'; '*neutral*'; or, '*negative*'.
-
-#### Algunos gráfico por sentimientos
-
-En el cuaderno Jupyter '[Chart visualisation](./docs/Chart%20visualisation.pdf)' se muestran un par de gráficos por sentimientos.
-
-Uno general
-
-![Sentimientos](./docs/pie-chart_by_sentiment.jpg)
-
-y otro agrupado por distritos
-
-![Sentimientos por distrito](./docs/bar-chart_sentiments_by_district.jpg)
-
-según la siguiente tabla obtenida
-
-| sentiment             | negative | neutral | positive |
-| --------------------- | --------:| -------:| --------:|
-| district              |          |         |          |
-| ---                   |      --- |     --- |      --- |
-| Arganzuela            |        1 |       4 |       48 |
-| Barajas               |        0 |       0 |       11 |
-| Carabanchel           |        2 |       7 |       72 |
-| Centro                |        1 |       2 |       67 |
-| Chamartín             |        0 |       4 |       71 |
-| Chamberí              |        1 |       0 |       63 |
-| Ciudad Lineal         |        0 |       1 |       77 |
-| Fuencarral-El Pardo   |        2 |       4 |       59 |
-| Hortaleza             |        0 |       5 |       51 |
-| Latina                |        1 |       7 |       67 |
-| Moncloa-Aravaca       |        3 |       2 |       58 |
-| Moratalaz             |        0 |       1 |       30 |
-| Puente de Vallecas    |        0 |       5 |       53 |
-| Retiro                |        1 |       1 |       45 |
-| Salamanca             |        1 |       3 |       59 |
-| San Blas - Canillejas |        1 |       1 |       51 |
-| Tetuán                |        2 |       2 |       39 |
-| Usera                 |        0 |       4 |       42 |
-| Vicálvaro             |        0 |       1 |       22 |
-| Villa de Vallecas     |        1 |       0 |       11 |
-| Villaverde            |        1 |       2 |       30 |
+El proceso de obtención del sentimiento asociado a cada uno de los versos se define en el cuaderno Jupiter 'Classify verses by sentiment' y el resultado se guardará en un nuevo fichero CSV [versosalpaso_sentiment_text-davinci-003.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003.csv). Este fichero es copia del original [versos al paso](./notebooks/input/versosalpaso.csv) al que se le ha añadido la columna 'sentiment' con los posibles valores: '*positive*'; '*neutral*'; or, '*negative*'. Los datos se puedn observar en [resumen de resultados](#resumen-de-resultados).
 
 #### Identificación del distrito
 
-Para la generación del gráfico por distrito se utilizó la [API de geocodificación inversa](https://nominatim.org/release-docs/latest/api/Reverse/) y uso libre de [Nominatim](https://nominatim.org/). La API genera para cada petición referida a un punto (latitud y longitud) una dirección con los siguientes datos y dependiendo del valor del parametro '*zoom*' (por defecto, 18)
+Los [versos al paso](./notebooks/input/versosalpaso.csv) están localizados en 204 barrios por lo que que parece interesante agruparlos por distritos, Madrid está compuesto por 21, para observar los sentimientos asociados a estos.
+
+Se utiliza la [API de geocodificación inversa](https://nominatim.org/release-docs/latest/api/Reverse/) de uso libre de [Nominatim](https://nominatim.org/) para agregar dicha información. La API genera para cada petición referida a un punto (latitud y longitud) una dirección con los siguientes datos y dependiendo del valor del parametro '*zoom*' (por defecto, 18)
 
 | zoom | address detail          |
 | ----:| ----------------------- |
@@ -175,79 +137,63 @@ $  curl https://nominatim.openstreetmap.org/reverse\?format\=jsonv2\&lat\=40.425
 $
 ```
 
-Se añaden los datos de 'quarter', 'city_district' y 'city' al fichero CSV con los sentimientos y se guardan en el nuevo fichero CSV [versosalpaso_sentiment_text-davinci-003_geo.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003_geo.csv).
+En el cuaderno Jupyter '[Adding district](./docs/Adding%20district.pdf)' se recoge este proceso. Se agregan los datos de 'quarter', 'city_district' y 'city' en el nuevo fichero CSV [versosalpaso_sentiment_text-davinci-003_geo.csv](./notebooks/output/versosalpaso_sentiment_text-davinci-003_geo.csv).
 
-## Usando la librería Python [pysentimiento](https://github.com/finiteautomata/pysentimiento/)[^2]
+### Usando la librería Python [pysentimiento](https://github.com/finiteautomata/pysentimiento/)[^2]
 
-En el cuaderno Jupyter '[Using robertuito-sentiment-analysis](./docs/Using%20robertuito-sentiment-analysis.pdf)' se expone un proceso análogo al ya descrito cuyos resultados se guardan en el fichero CSV [versosalpaso_robertuito-sentiment-analysis.csv](./notebooks/output/versosalpaso_robertuito-sentiment-analysis.csv) y que se resumen en los siguientes gráficos
+Se trata de un modelo entrenado con el corpus TASS 2020 (alrededor de 5k tuits) en lengua española. El modelo base es [RoBERTuito](https://github.com/pysentimiento/robertuito)[^3], modelo lingúístico preentrenado para contenidos generados por usuarios en español y entrenado siguiendo las directrices de RoBERTa sobre 500M de tuits.
 
-![Sentimientos (pysentimiento)](./docs/pie-chart_by_pysentimiento.jpg)
+En el cuaderno Jupyter '[Using robertuito-sentiment-analysis](./docs/Using%20robertuito-sentiment-analysis.pdf)' se desarrolla un proceso análogo al ya descrito cuyos resultados se guardan en el fichero CSV [versosalpaso_robertuito-sentiment-analysis.csv](./notebooks/output/versosalpaso_robertuito-sentiment-analysis.csv). Los resultados se pueden observar en [resumen de resultados](#resumen-de-resultados).
 
-![Sentimientos por distrito (pysentimiento)](./docs/bar-chart_pysentimiento_by_district.jpg)
+### Usando la librería Python [twitter-XLM-roBERTa-base for Emotion Analysis](https://huggingface.co/daveni/twitter-xlm-roberta-emotion-es)[^4]
 
-en base a la tabla
+Se trata de un modelo basado en XLM-roBERTa entrenado sobre ~198M de tweets y afinado para el análisis de emociones en lengua española. Este modelo fue presentado a la competición EmoEvalEs, parte de la Conferencia IberLEF 2021, donde la tarea propuesta era la clasificación de tweets en español entre siete clases diferentes: enfado, asco, miedo, alegría, tristeza, sorpresa y otros.
 
-| robertuito_sentiment  | negative | neutral | positive |
+De igual forma a la comentada arriba tendremos un nuevo cuaderno Jupyter '[Using twitter-XLM-roBERTa-base](./notebooks/Using%20twitter-XLM-roBERTa-base.ipynb)' con datos guardados en el fichero [versosalpaso_twitter-XLM-roBERTa-base.csv](./notebooks/output/versosalpaso_twitter-XLM-roBERTa-base.csv). Los resultados se pueden observar a continuación. Para nuestro propósito se consideran las clases: enfado, asco, miedo y tristeza como sentimientos negativos; alegría como positivo; y, sorpresa y otros como neutro.
+
+## Resumen de resultados
+
+Estos resultados se muestran en el cuaderno Jupyter '[Compare results](./docs/Compare%20results.pdf)'.
+
+**General**
+
+| method                | negative | neutral | positive |
 | --------------------- | --------:| -------:| --------:|
-| district              |          |         |          |
-| ---                   |      --- |     --- |      --- |
-| Arganzuela            |       12 |      30 |       11 |
-| Barajas               |        3 |       5 |        3 |
-| Carabanchel           |       20 |      49 |       12 |
-| Centro                |       16 |      38 |       16 |
-| Chamartín             |       21 |      36 |       18 |
-| Chamberí              |       20 |      36 |        8 |
-| Ciudad Lineal         |       22 |      47 |        9 |
-| Fuencarral-El Pardo   |       12 |      43 |       10 |
-| Hortaleza             |       11 |      35 |       10 |
-| Latina                |       17 |      46 |       12 |
-| Moncloa-Aravaca       |       19 |      37 |        7 |
-| Moratalaz             |        6 |      20 |        5 |
-| Puente de Vallecas    |       21 |      29 |        8 |
-| Retiro                |       10 |      30 |        7 |
-| Salamanca             |       18 |      33 |       12 |
-| San Blas - Canillejas |       13 |      30 |       10 |
-| Tetuán                |       16 |      22 |        5 |
-| Usera                 |        9 |      29 |        8 |
-| Vicálvaro             |        6 |      13 |        4 |
-| Villa de Vallecas     |        0 |       8 |        4 |
-| Villaverde            |        5 |      21 |        7 |
+| openai_sentiment      |       18 |      56 |      126 |
+| robertuito_sentiment  |      277 |     637 |      186 |
+| twitter-xml_sentiment |      235 |     780 |       85 |
 
-## Usando la librería Python [twitter-XLM-roBERTa-base for Emotion Analysis](https://huggingface.co/daveni/twitter-xlm-roberta-emotion-es)
+![Sentiments by method](./docs/bar-char_summary_by_method.jpg)
 
-De igual forma a la comentada arriba tendremos un nuevo cuaderno Jupyter '[Using twitter-XLM-roBERTa-base.ipynb](./notebooks/Using%20twitter-XLM-roBERTa-base.ipynb)' con datos guardados en el fichero [versosalpaso_twitter-XLM-roBERTa-base.csv](./notebooks/output/versosalpaso_twitter-XLM-roBERTa-base.csv)  y que se resumen en los siguientes gráficos
+**Por distrito**
 
-![Sentimientos (twitter-XLM-roBERTa-base)](./docs/pie-chart_by_twitter-XLM-roBERTa-base.jpg)
+![Sentiments by district](./docs/bar-chart_summary_by_districts.jpg)
 
-![Sentimientos por distrito (twitter-XLM-roBERTa-base)](./docs/bar-chart_twitter-XLM-roBERTa-base_by_district.jpg)
-
-en base a la tabla
-
-| twitter-xml_sentiment | negative | neutral | positive |
-| --------------------- | --------:| -------:| --------:|
-| district              |          |         |          |
-| ---                   |      --- |     --- |      --- |
-| Arganzuela            |       12 |      38 |        3 |
-| Barajas               |        2 |       8 |        1 |
-| Carabanchel           |       20 |      56 |        5 |
-| Centro                |       13 |      50 |        7 |
-| Chamartín             |       14 |      54 |        7 |
-| Chamberí              |       11 |      46 |        7 |
-| Ciudad Lineal         |       15 |      58 |        5 |
-| Fuencarral-El Pardo   |       16 |      45 |        4 |
-| Hortaleza             |        8 |      43 |        5 |
-| Latina                |       17 |      52 |        6 |
-| Moncloa-Aravaca       |       17 |      45 |        1 |
-| Moratalaz             |        6 |      22 |        3 |
-| Puente de Vallecas    |       14 |      41 |        3 |
-| Retiro                |       11 |      33 |        3 |
-| Salamanca             |       16 |      40 |        7 |
-| San Blas - Canillejas |       12 |      34 |        7 |
-| Tetuán                |       10 |      31 |        2 |
-| Usera                 |        6 |      37 |        3 |
-| Vicálvaro             |        4 |      18 |        1 |
-| Villa de Vallecas     |        1 |       9 |        2 |
-| Villaverde            |       10 |      20 |        3 |
+|                       |   openai_sentiment ||| robertuito_sentiment ||| twitter-xml_sentiment |||
+| --------------------- | --------:| -------:| --------:| --------------------:| -------:| --------:| ---------------------:| -------:| --------:|
+| district              | negative | neutral | positive |             negative | neutral | positive |              negative | neutral | positive |
+| ---                   |      --- |     --- |      --- |                  --- |     --- |      --- |                   --- |     --- |      --- |
+| Arganzuela            |        1 |       4 |       48 |                   12 |      30 |       11 |                    12 |      38 |        3 |
+| Barajas               |        0 |       0 |       11 |                    3 |       5 |        3 |                     2 |       8 |        1 |
+| Carabanchel           |        2 |       7 |       72 |                   20 |      49 |       12 |                    20 |      56 |        5 |
+| Centro                |        1 |       2 |       67 |                   16 |      38 |       16 |                    13 |      50 |        7 |
+| Chamartín             |        0 |       4 |       71 |                   21 |      36 |       18 |                    14 |      54 |        7 |
+| Chamberí              |        1 |       0 |       63 |                   20 |      36 |        8 |                    11 |      46 |        7 |
+| Ciudad Lineal         |        0 |       1 |       77 |                   22 |      47 |        9 |                    15 |      58 |        5 |
+| Fuencarral-El Pardo   |        2 |       4 |       59 |                   12 |      43 |       10 |                    16 |      45 |        4 |
+| Hortaleza             |        0 |       5 |       51 |                   11 |      35 |       10 |                     8 |      43 |        5 |
+| Latina                |        1 |       7 |       67 |                   17 |      46 |       12 |                    17 |      52 |        6 |
+| Moncloa-Aravaca       |        3 |       2 |       58 |                   19 |      37 |        7 |                    17 |      45 |        1 |
+| Moratalaz             |        0 |       1 |       30 |                    6 |      20 |        5 |                     6 |      22 |        3 |
+| Puente de Vallecas    |        0 |       5 |       53 |                   21 |      29 |        8 |                    14 |      41 |        3 |
+| Retiro                |        1 |       1 |       45 |                   10 |      30 |        7 |                    11 |      33 |        3 |
+| Salamanca             |        1 |       3 |       59 |                   18 |      33 |       12 |                    16 |      40 |        7 |
+| San Blas - Canillejas |        1 |       1 |       51 |                   13 |      30 |       10 |                    12 |      34 |        7 |
+| Tetuán                |        2 |       2 |       39 |                   16 |      22 |        5 |                    10 |      31 |        2 |
+| Usera                 |        0 |       4 |       42 |                    9 |      29 |        8 |                     6 |      37 |        3 |
+| Vicálvaro             |        0 |       1 |       22 |                    6 |      13 |        4 |                     4 |      18 |        1 |
+| Villa de Vallecas     |        1 |       0 |       11 |                    0 |       8 |        4 |                     1 |       9 |        2 |
+| Villaverde            |        1 |       2 |       30 |                    5 |      21 |        7 |                    10 |      20 |        3 |
 
 ## El mapa de los 'Sentimientos al paso'
 
@@ -258,4 +204,6 @@ En este [enlace](https://migupl.github.io/sentimientos-al-paso-visualise/) se mu
 [MIT license](./LICENSE)
 
 [^1]: Se usa 'jupy-sentimiento-versos' como nombre del contenedor para separar este experimento de cualquier otro. La imagen define *jovyan* como el usuario no 'root' (uid=1000, gid=100) con privilegios completos sobre los directorios */home/jovyan/* y */opt/conda*.
-[^2]: Juan Manuel Pérez and Juan Carlos Giudici and Franco Luque. **pysentimiento**: A Python Toolkit for Sentiment Analysis and SocialNLP tasks [Internet]. arXiv; 2011. Available from: https://arxiv.org/abs/2106.09462
+[^2]: Juan Manuel Pérez and Juan Carlos Giudici and Franco Luque. **pysentimiento**: A Python Toolkit for Sentiment Analysis and SocialNLP tasks [Internet]. arXiv; 2021. Available from: https://arxiv.org/abs/2106.09462
+[^3]: Datos preentrenado de RoBERTuito en [huggingface](https://huggingface.co/datasets/pysentimiento/spanish-tweets)
+[^4]: Vera, D and Araque, O and Iglesias, CA. GSI-UPM at IberLEF2021: Emotion Analysis of Spanish Tweets by Fine-tuning the XLM-RoBERTa Language Model. 2021.
